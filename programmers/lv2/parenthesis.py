@@ -1,25 +1,25 @@
 def solution(s):
     answer = True
-    close_list = []
+    is_pair = 0
     for i in s:
         if i == "(":
-            close_list.append(True)
+            is_pair += 1
         elif i == ")":
-            if len(close_list) > 0:
-                close_list.pop()
+            if is_pair > 0:
+                is_pair -= 1
             else:
                 answer = False
                 break
-    if len(close_list) > 0:
+    if  is_pair > 0:
         answer = False
     return answer
 
 
 if __name__ == "__main__":
-    # s = "()()"
+    s = "()()"
     # s = "(())()"
     # s = ")()("
-    s = "((())()"
+    # s = "((())()"
     # s = "(()("
     ret = solution(s)
     print(f"ret={ret}")
