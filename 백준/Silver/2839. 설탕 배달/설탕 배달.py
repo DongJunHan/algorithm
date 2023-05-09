@@ -1,30 +1,35 @@
-def solution():
-    a = input()
-    a = int(a)
-    count2 = 99999
-    five = a // 5
-    if five == 0:
-        if a % 3 != 0:
-            return -1
-        else:
-            return a // 3
-    count = five
-    if a % 3 == 0:
-        count2 = a // 3
-    for i in range(five,0,-1):
-        if a - (5 * i) == 0:
-            return count
-        three = a - (5 * i)
-        if three % 3 == 0:
-            count += three // 3
+def solution(N):
+    answer = 9999
+    if N % 5 == 0:
+        answer = min(answer, N // 5)
+    if N % 3 == 0:
+        answer = min (answer, N // 3)
+    if (N % 5) % 3 == 0:
+        s = N // 5
+        s += (N%5)//3
+        answer = min(answer, s)
+    elif (N % 3) % 5 == 0:
+        s = N // 3
+        s += (N%3) // 5
+        answer = min(answer, s)
+    five = 5
+    three = 3
+    s = 0
+    absolute = N
+    while True:
+        if (N - five) < 0:
             break
-        count -= 1
-    if count > 0 and count < count2:
-        return count
-    elif count2 != 99999:
-        return count2
-    return -1
-
+        N = N - five
+        s += 1
+        if N % three == 0:
+            tmp = N // three
+            answer = min(answer, s + tmp)
+    if answer == 9999:
+        answer = -1
+    return answer
+        
 
 if __name__ == "__main__":
-    print(solution())
+    N = input()
+    ret = solution(int(N))
+    print(ret)
